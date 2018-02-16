@@ -1,6 +1,6 @@
 <template>
 	<div class="pb-5 py-5 container">
-		<form id="personal-form" @:submit.prevent="onSubmit">
+		<form id="personal-form" @submit.prevent="onSubmit">
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="first_name" v-text="attributeLabels.first_name"></label>
@@ -66,9 +66,9 @@ export default {
 			}
 		}
 	},
-	methods () {
-	    onSubmit: () => {
-	      alert();
+	methods: {
+	    onSubmit () {
+	    	bus.$emit('models-push', this.attributes);
 	    }
 	  }
 }
