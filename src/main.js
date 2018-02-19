@@ -3,9 +3,12 @@
 import Vue from 'vue'
 import App from './App'
 import BootstrapVue from 'bootstrap-vue'
+import VeeValidate from 'vee-validate';
 
 Vue.use(BootstrapVue);
 Vue.config.productionTip = false
+
+Vue.use(VeeValidate);
 
 /* eslint-disable no-new */
 new Vue({

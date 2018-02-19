@@ -1,39 +1,39 @@
 <template>
 	<div class="pb-5 py-5 container">
-		<form id="personal-form" @submit.prevent="onSubmit">
+		<form id="personal-form" @submit.prevent="onValidateForm('personeForm')" data-vv-scope="personeForm">
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="first_name" v-text="attributeLabels.first_name"></label>
-					<input type="text" class="form-control" id="first_name" v-model="attributes.first_name" />
-					<span class="help is-danger"></span>
+					<input name="first_name" type="text" class="form-control" id="first_name" v-model="attributes.first_name" v-validate="'required|alpha'" :class="{'form-control': true, 'is-danger': errors.has('personeForm.first_name')}" />
+					<p class="help is-danger" v-show="errors.has('personeForm.first_name')">{{ errors.first('personeForm.first_name') }}</p>
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="last_name" v-text="attributeLabels.last_name"></label>
-					<input type="text" class="form-control" id="last_name" v-model="attributes.last_name" />
-					<span class="help is-danger"></span>
+					<input name="last_name" type="text" class="form-control" id="last_name" v-model="attributes.last_name" v-validate="'required|alpha'" :class="{'form-control': true, 'is-danger': errors.has('personeForm.last_name')}" />
+					<p class="help is-danger" v-show="errors.has('personeForm.last_name')">{{ errors.first('personeForm.last_name') }}</p>
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="email" v-text="attributeLabels.email"></label>
-					<input type="email" class="form-control" id="email" v-model="attributes.email" />
-					<span class="help is-danger"></span>
+					<input name="email" v-validate="'required|email'" :class="{'form-control': true, 'is-danger': errors.has('personeForm.email')}" v-model="attributes.email" type="text" id="email" />
+					<p class="help is-danger" v-show="errors.has('personeForm.email')">{{ errors.first('personeForm.email') }}</p>
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="age" v-text="attributeLabels.age"></label>
-					<input type="text" class="form-control" id="age" v-model="attributes.age" />
-					<span class="help is-danger"></span>
+					<input name="age" type="text" class="form-control" id="age" v-model="attributes.age" v-validate="'required|alpha'" :class="{'form-control': true, 'is-danger': errors.has('personeForm.age')}" />
+					<p class="help is-danger" v-show="errors.has('personeForm.age')">{{ errors.first('personeForm.age') }}</p>
 				</div>
 			</div>
 			<div class="row form-group">
 				<div class="col-md-6 offset-md-3">
 					<label for="skype" v-text="attributeLabels.skype"></label>
-					<input type="string" class="form-control" id="skype" v-model="attributes.skype" />
-					<span class="help is-danger"></span>
+					<input name="skype" type="string" class="form-control" id="skype" v-model="attributes.skype" v-validate="'required|alpha'" :class="{'form-control': true, 'is-danger': errors.has('personeForm.skype')}" />
+					<p class="help is-danger" v-show="errors.has('personeForm.skype')">{{ errors.first('personeForm.skype') }}</p>
 				</div>
 			</div>
 			<div class="row form-group">
@@ -67,9 +67,13 @@ export default {
 		}
 	},
 	methods: {
-	    onSubmit () {
-	    	bus.$emit('models-push', this.attributes);
-	    }
+		onValidateForm: function (scope) {
+			this.$validator.validateAll(scope).then((isValidate) => {
+				if (isValidate) {
+					bus.$emit('models-push', this.attributes);
+				}
+			});
+		}
 	  }
 }
 </script>
