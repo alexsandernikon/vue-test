@@ -14,13 +14,13 @@ export default {
     name: 'App',
     data () {
         return {
-            models: []
+            models: JSON.parse(localStorage.getItem('models') || '[]')
         }
     },
     created () {
         bus.$on('models-push', (data) => {
-            console.log(data);
             this.models.push(Object.assign({}, data));
+            localStorage.setItem('models', JSON.stringify(this.models));
         })
     },
     components: {

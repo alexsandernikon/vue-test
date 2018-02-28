@@ -8,15 +8,21 @@
 					<th>E-mail</th>
 					<th>Age</th>
 					<th>Skype</th>
+					<th>Hobbies</th>
+					<th>Telephones</th>
+					<th>Nickname</th>
 				</tr>
 			</thead>
 			<tbody>
 				<tr v-for="(model, index) in models">
-					<td>{{ model.first_name }}</td>
-					<td>{{ model.last_name }}</td>
+					<td>{{ model.firstName }}</td>
+					<td>{{ model.lastName }}</td>
 					<td>{{ model.email }}</td>
 					<td>{{ model.age }}</td>
 					<td>{{ model.skype }}</td>
+					<td>{{ model.hobbies }}</td>
+					<td>{{ model.telephones }}</td>
+					<td>{{ model.nickname }}</td>
 				</tr>
 			</tbody>
 		</table>
